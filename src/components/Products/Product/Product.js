@@ -5,11 +5,13 @@ import useStyles from "./styles";
 
 
 const Product = ({ product, onAddToCart }) => {
+    console.log(product)
 
     const classes = useStyles();
     let description = product.description.length > 15 ? product.description.slice(0, 55) + '...' : product.description;
     let productName = product.name.length > 30 ? product.name.slice(0, 20) + '...' : product.name;
-
+    
+    
     return (
         <Card className={classes.root}>
             <CardMedia className={classes.media} image={product.media.source} title={product.name} />

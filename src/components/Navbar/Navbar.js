@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
-import { AppBar, Toolbar, IconButton, Badge, MenuItem, Menu, Typography } from '@material-ui/core'
-import { ShoppingCart } from '@material-ui/icons'
-import logo from "../../images/logo.png";
+import { AppBar, Toolbar, IconButton, Badge, MenuItem, Menu, Typography, MenuList } from '@material-ui/core'
+import cover from "../../images/cover.png";
+import { FiShoppingBag, FiMenu, FiX} from "react-icons/fi";
 import useStyle from './style'
 import { Link, useLocation } from 'react-router-dom';
+import './Navbar.css';
 
 
 
@@ -11,6 +12,7 @@ const Navbar = ({ totalItems }) => {
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
     const classes = useStyle();
     const location = useLocation();
+    const [ toggle, setToggle ] = useState(false);
 
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
@@ -23,7 +25,7 @@ const Navbar = ({ totalItems }) => {
         <MenuItem>
           <IconButton component={Link} to="/cart" aria-label="Show cart items" color="inherit">
             <Badge badgeContent={totalItems} color="secondary">
-              <ShoppingCart />
+              <FiShoppingBag />
             </Badge>
           </IconButton>
           <p>Cart</p>
@@ -31,25 +33,38 @@ const Navbar = ({ totalItems }) => {
       </Menu>
     );
 
+    const myStyle = {
+      padding: '10px 50px'
+    }
+
 
     return (
         <>
             <AppBar position='fixed' className={classes.appBar} color='inherit'>
-                <Toolbar>
+                <Toolbar style={myStyle} >
                     <Typography component={ Link } to='/' variant='h6' className={classes.title} color='inherit'>
-                        <img src={logo} alt="commerce.js" height='25px' className={classes.image}/>
-                        Commerce.js
+                        <img src={cover} alt="commerce.js" height='60px' className={classes.image}/>
                     </Typography>
                     <div className={classes.grow}/>
+                    <div className={toggle ? 'stay' : 'remove'}>
+                      <MenuList className={classes.list} >
+                        <MenuItem  component={ Link } to='/products'><p className='underline'>Products</p></MenuItem>
+                        <MenuItem component={ Link } to='/'><p className='underline'>Account</p></MenuItem>
+                        <MenuItem component={ Link } to='/'><p className='underline'>About</p></MenuItem>
+                      </MenuList>
+                    </div>
                     {location.pathname === '/' && (     
                     <div className={classes.button}>
                         <IconButton component={ Link } to='/cart' aria-label="Show cart items" color='inherit'>
                             <Badge badgeContent={totalItems} color='secondary'>
-                                 <ShoppingCart />
+                                 <FiShoppingBag />
                             </Badge>
                         </IconButton>
                     </div>
                     )}
+                    <div className='bars' onClick={() => setToggle(!toggle)}>
+                          {toggle ? <FiX/> : <FiMenu/>}
+                    </div>  
                 </Toolbar>
             </AppBar>
             {renderMobileMenu}

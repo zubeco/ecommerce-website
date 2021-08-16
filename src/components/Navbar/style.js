@@ -17,6 +17,21 @@ export default makeStyles((theme) => ({
     display: 'flex',
     textDecoration: 'none',
   },
+
+  list: {
+    display: 'flex',
+    textDecoration: 'none',
+    alignItems: 'center',
+    marginRight: '80px',
+    [theme.breakpoints.down('md')]: {
+      display: 'block',
+      color: 'white',
+      padding: '10px 0px 0px 10px',
+      justifyContent: 'center',
+      textAlign: 'center',
+      alignItems: 'center'
+    },
+  },
   image: {
     marginRight: '10px',
   },

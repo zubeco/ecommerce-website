@@ -80,7 +80,7 @@ const Checkout = ({cart, order, onCaptureCheckOut, error}) => {
             <Divider classes={classes.divider}/>
         </div>
         <br/>
-        <Button component={ Link } variant='outlined' type='button'>Back to Home</Button>
+        <Button component={ Link } to="/"  variant='outlined' type='button'>Back to Home</Button>
     </>
     ): (
         <div className={classes.spinner}>
